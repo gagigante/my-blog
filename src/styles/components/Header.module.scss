@@ -1,0 +1,47 @@
+.wrapper {
+  background-color: var(--gray-850);
+
+  div.content {
+    height: 4.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    > a {
+      color: var(--white);
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--gray-300);
+      }
+    }
+
+    ul.links {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        margin: 0.7rem;
+
+        a svg {
+          width: 1.5rem;
+          height: 1.5rem;
+          color: var(--white);
+          transition: color 0.2s;
+
+          &:hover {
+            color: var(--gray-300);
+          }
+        }
+      }
+    }
+  }
+}
