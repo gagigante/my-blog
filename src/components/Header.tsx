@@ -7,7 +7,13 @@ import {
 
 import styles from '@styles/components/Header.module.scss'
 
-export const Header = () => {
+interface HeaderProps {
+  githubUrl: string
+  linkedInUrl: string
+  twitterUrl: string
+}
+
+export const Header = ({ githubUrl, linkedInUrl, twitterUrl }: HeaderProps) => {
   return (
     <header className={styles.wrapper}>
       <div className={styles.content}>
@@ -17,31 +23,19 @@ export const Header = () => {
 
         <ul className={styles.links}>
           <li>
-            <a
-              href={process.env.NEXT_PUBLIC_GITHUB_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={githubUrl} target="_blank" rel="noreferrer">
               <AiOutlineGithub />
             </a>
           </li>
 
           <li>
-            <a
-              href={process.env.NEXT_PUIBLIC_LINKEDIN_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={linkedInUrl} target="_blank" rel="noreferrer">
               <AiFillLinkedin />
             </a>
           </li>
 
           <li>
-            <a
-              href={process.env.NEXT_PUBLIC_TWITTER_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={twitterUrl} target="_blank" rel="noreferrer">
               <AiOutlineTwitter />
             </a>
           </li>
