@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1.5rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gray-850);
+
+  & + a {
+    margin-top: 1.5rem;
+  }
+
+  &:hover h2 {
+    background-clip: text;
+    background: var(--hover-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  span.metaData {
+    font-size: 0.8rem;
+    color: var(--gray-300);
+    margin-bottom: 0.2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+    transition: 0.2s;
+  }
+
+  div.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    line-height: 1.6;
+    color: var(--gray-100);
+  }
+}
