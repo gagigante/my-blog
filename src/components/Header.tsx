@@ -1,9 +1,5 @@
 import Link from 'next/link'
-import {
-  AiOutlineGithub,
-  AiFillLinkedin,
-  AiOutlineTwitter
-} from 'react-icons/ai'
+import { AiOutlineGithub, AiFillLinkedin, AiOutlineTwitter } from 'react-icons/ai'
 
 import styles from '@styles/components/Header.module.scss'
 

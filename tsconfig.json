@@ -18,6 +18,7 @@
       "@public/*": ["./src/public/*"],
       "@pages/*": ["./src/pages/*"],
       "@components/*": ["./src/components/*"],
+      "@services/*": ["./src/services/*"],
       "@styles/*": ["./src/styles/*"]
     }
   },
