@@ -46,6 +46,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/prefer-default-export": "off",
     "import/no-duplicates": "off",
+    "require-jsdoc": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-use-before-define": "off",
