@@ -158,7 +158,6 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl }) 
               path={`/post/${post.slug}`}
               title={post.title}
               abstract={post.abstract}
-              views={post.views}
               readingTime={post.readingTime}
               tags={post.tags}
               date={post.date}
