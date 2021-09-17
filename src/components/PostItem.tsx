@@ -10,7 +10,7 @@ interface PostItemProps {
   title: string
   abstract: string
   readingTime: number
-  tags: Array<{ id: number; name: string; color: string }>
+  tags: Array<{ id: string; name: string; color: string }>
   date: string
 }
 

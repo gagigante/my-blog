@@ -3,128 +3,37 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Prismic from '@prismicio/client'
 import { RichText, Link } from 'prismic-dom'
+import { useReadingTime } from 'react-hook-reading-time'
 
 import { getPrismicClient } from '@services/prismic'
 
 import { Header } from '@components/Header'
 import { PostItem } from '@components/PostItem'
 
+import { getPostTags } from '@utils/getPostTags'
+
+import { POST_PAGINATION_QUANTITY } from '@constants/POST_PAGINATION_QUANTITY'
+
 import styles from '@styles/pages/Home.module.scss'
 
-const DATA = [
-  {
-    slug: '0',
-    date: new Date('06/06/2021').toLocaleDateString('pt-BR', {
-      dateStyle: 'long'
-    }),
-    title: `Next.JS - Novidades na versão 10 e atualização do blog para
-    melhorar a performance`,
-    abstract: `Se você nos acompanhou nos últimos posts, já viu que criamos um
-    blog com um contador de visitas usando o MongoDB e Next.js,
-    depois adicionamos a funcionalidade de dark mode.`,
-    views: 10,
-    readingTime: 10,
-    tags: [
-      {
-        id: 0,
-        name: 'JavaScript',
-        color: '#fff000'
-      }
-    ]
-  },
-  {
-    slug: '1',
-    date: new Date('06/06/2021').toLocaleDateString('pt-BR', {
-      dateStyle: 'long'
-    }),
-    title: `Como renomear vários arquivos de uma vez usando o terminal`,
-    abstract: `Suponha que seu projeto tenha uma base de código com 150
-    arquivos JavaScript e você precisar migrar para TypeScript
-    alterando as extensões dos arquivos. 🤔`,
-    views: 10,
-    readingTime: 10,
-    tags: [
-      {
-        id: 0,
-        name: 'JavaScript',
-        color: '#fff000'
-      },
-      {
-        id: 1,
-        name: 'TypeScript',
-        color: '#3178c6'
-      }
-    ]
-  },
-  {
-    slug: '2',
-    date: new Date('06/06/2021').toLocaleDateString('pt-BR', {
-      dateStyle: 'long'
-    }),
-    title: `Obtendo o status de progresso do envio de dados com Axios`,
-    abstract: `Vamos mostrar na prática como obter o progresso de cada
-    requisição HTTP sendo feita através do método POST, do front end
-    para o back end utilizando o Axios.`,
-    views: 10,
-    readingTime: 10,
-    tags: [
-      {
-        id: 0,
-        name: 'JavaScript',
-        color: '#fff000'
-      },
-      {
-        id: 1,
-        name: 'TypeScript',
-        color: '#3178c6'
-      },
-      {
-        id: 2,
-        name: 'React',
-        color: '#61dbfb'
-      }
-    ]
-  },
-  {
-    slug: '3',
-    date: new Date('06/06/2021').toLocaleDateString('pt-BR', {
-      dateStyle: 'long'
-    }),
-    title: `Dark Mode com CSS — mudando a aparência do Blog de maneira
-    simples e rápida`,
-    abstract: `Umas das funcionalidades que está na moda em Blogs e Sites é o
-    Dark Mode. Devs, em sua maioria, curtem bastante utilizar temas
-    escuros, tanto na IDE quanto em outros apps.`,
-    views: 10,
-    readingTime: 10,
-    tags: [
-      {
-        id: 0,
-        name: 'JavaScript',
-        color: '#fff000'
-      },
-      {
-        id: 1,
-        name: 'TypeScript',
-        color: '#3178c6'
-      },
-      {
-        id: 2,
-        name: 'React',
-        color: '#61dbfb'
-      }
-    ]
-  }
-]
+interface Post {
+  slug: string
+  title: string
+  abstract: string
+  tags: Array<{ id: string; name: string; color: string }>
+  readingTime: number
+  date: string
+}
 
 interface HomeProps {
   bio: string
   githubUrl: string
   linkedInUrl: string
   twitterUrl: string
+  posts: Post[]
 }
 
-const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl }) => {
+const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, posts }) => {
   return (
     <>
       {/* TODO: SEO improvements */}
@@ -152,7 +61,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl }) 
         {/* TODO: Search engine */}
 
         <section className={styles.posts}>
-          {DATA.map(post => (
+          {posts.map(post => (
             <PostItem
               slug={post.slug}
               path={`/post/${post.slug}`}
@@ -181,12 +90,35 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     results: [document]
   } = await prismic.query([Prismic.predicates.at('document.type', 'home')])
 
+  const { results } = await prismic.query([Prismic.predicates.at('document.type', 'post')], {
+    fetchLinks: ['tag.tag_color', 'tag.tag_name'],
+    orderings: '[document.first_publication_date desc]',
+    pageSize: POST_PAGINATION_QUANTITY
+  })
+
+  // TODO: Format date using pt-BR locale
+  const posts: Post[] = results.map(post => {
+    return {
+      slug: String(post.uid),
+      title: RichText.asText(post.data.title),
+      abstract: post.data.content.find((content: { type: string }) => content.type === 'paragraph')?.text ?? '',
+      tags: getPostTags(post.data.tags),
+      readingTime: useReadingTime(RichText.asText(post.data.content)).minutes as number,
+      date: new Date(String(post.first_publication_date)).toLocaleString('en', {
+        year: 'numeric',
+        month: 'long',
+        day: '2-digit'
+      })
+    }
+  })
+
   return {
     props: {
       bio: RichText.asText(document.data.bio),
       githubUrl: Link.url(document.data.github_url),
       linkedInUrl: Link.url(document.data.linkedin_url),
-      twitterUrl: Link.url(document.data.twitter_url)
+      twitterUrl: Link.url(document.data.twitter_url),
+      posts
     },
     revalidate: A_WEEK_IN_SECONDS
   }

@@ -49,6 +49,7 @@
     "require-jsdoc": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/camelcase": "off",
+    "camelcase": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-interface": [

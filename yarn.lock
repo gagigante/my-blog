@@ -3299,6 +3299,11 @@ react-dom@17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
+react-hook-reading-time@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-hook-reading-time/-/react-hook-reading-time-1.0.0.tgz#5f199cdd5c9ec8977a0f5c4677fdb61717287f68"
+  integrity sha512-kIudDiGHCTzBlV95WM6xPN3EBUViQynJvcul/NL+8My6fsl0BeKoCi9Dp19g69PlyF3WLA3QAyjVL99+Ucgs6A==
+
 react-icons@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.2.0.tgz#6dda80c8a8f338ff96a1851424d63083282630d0"
