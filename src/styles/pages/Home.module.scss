@@ -1,7 +1,7 @@
 .wrapper {
   max-width: 1120px;  
-  margin: 0 auto;
-  padding: 0 2rem 2rem;
+  margin: 0 auto 2.5rem;
+  padding: 0 2rem;
 
   section.hero {
     display: flex;
@@ -34,6 +34,38 @@
   }
 
   section.posts {
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  button.loadMorePosts {
+    display: block;
+    height: 3.5rem;
+    padding: 0 2.5rem;
+    color: var(--white);
+    background-color: var(--gray-700);
+    border: 0;
+    border-radius: 0.5rem;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: var(--gray-800);
+    }
+  }
+}
+
+button.scrollToTop {
+  position: fixed;
+  width: 3.5rem;
+  height: 3.5rem;
+  right: 2.5rem;
+  bottom: 2.5rem;
+  color: var(--white);
+  background-color: var(--gray-700);
+  border: 0;
+  border-radius: 0.5rem;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: var(--gray-800);
   }
 }

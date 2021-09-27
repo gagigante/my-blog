@@ -1,9 +1,12 @@
+import { useEffect, useState } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Prismic from '@prismicio/client'
 import { RichText, Link } from 'prismic-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useReadingTime } from 'react-hook-reading-time'
+import { AiOutlineArrowUp } from 'react-icons/ai'
 
 import { getPrismicClient } from '@services/prismic'
 
@@ -34,6 +37,25 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, posts }) => {
+  const [isScrollToTopButtonVisible, setIsScrollToTopButtonVisible] = useState(false)
+
+  useEffect(() => {
+    window.addEventListener('scroll', toggleScrollToTopButtonVisibility)
+  }, [])
+
+  function toggleScrollToTopButtonVisibility() {
+    if (window.pageYOffset > 300) {
+      setIsScrollToTopButtonVisible(true)
+      return
+    }
+
+    setIsScrollToTopButtonVisible(false)
+  }
+
+  function handleScrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <>
       {/* TODO: SEO improvements */}
@@ -77,6 +99,21 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
 
         {/* TODO: Add pagination */}
       </main>
+
+      <AnimatePresence>
+        {isScrollToTopButtonVisible && (
+          <motion.button
+            className={styles.scrollToTop}
+            key="scrollToTopButton"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleScrollToTop}
+          >
+            <AiOutlineArrowUp size={16} />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </>
   )
 }
