@@ -86,6 +86,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
               width={96}
               height={96}
               layout="responsive"
+              alt="Gabriel Gigante"
             />
           </div>
 

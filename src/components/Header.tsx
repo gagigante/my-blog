@@ -19,19 +19,19 @@ export const Header = ({ githubUrl, linkedInUrl, twitterUrl }: HeaderProps) => {
 
         <ul className={styles.links}>
           <li>
-            <a href={githubUrl} target="_blank" rel="noreferrer">
+            <a href={githubUrl} aria-label="GitHub" target="_blank" rel="noreferrer">
               <AiOutlineGithub />
             </a>
           </li>
 
           <li>
-            <a href={linkedInUrl} target="_blank" rel="noreferrer">
+            <a href={linkedInUrl} aria-label="LinkedIn" target="_blank" rel="noreferrer">
               <AiFillLinkedin />
             </a>
           </li>
 
           <li>
-            <a href={twitterUrl} target="_blank" rel="noreferrer">
+            <a href={twitterUrl} aria-label="Twitter" target="_blank" rel="noreferrer">
               <AiOutlineTwitter />
             </a>
           </li>
