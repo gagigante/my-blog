@@ -1,3 +1,5 @@
+import { Tag } from '@models/Tag'
+
 interface TagDocument {
   tag: {
     id: string
@@ -8,7 +10,7 @@ interface TagDocument {
   }
 }
 
-export const getPostTags = (tags: TagDocument[]): Array<{ id: string; name: string; color: string }> => {
+export const getPostTags = (tags: TagDocument[]): Tag[] => {
   return tags.map(item => {
     return {
       id: item.tag.id,
