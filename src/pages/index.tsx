@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Prismic from '@prismicio/client'
 import { RichText, Link } from 'prismic-dom'
-import { AnimatePresence, motion } from 'framer-motion'
 import { useReadingTime } from 'react-hook-reading-time'
-import { AiOutlineArrowUp } from 'react-icons/ai'
 import { Dots } from 'react-activity'
 import 'react-activity/dist/Dots.css'
 
@@ -15,6 +13,7 @@ import { api } from '@services/api'
 
 import { Header } from '@components/Header'
 import { PostItem } from '@components/PostItem'
+import { ScrollToTopButton } from '@components/ScrollToTopButton'
 
 import { Post } from '@models/Post'
 
@@ -37,26 +36,8 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
   const [postList, setPostList] = useState(posts)
   const [currentPage, setCurrentPage] = useState(1)
   const [isFetchingMorePosts, setIsFetchingMorePosts] = useState(false)
-  const [isScrollToTopButtonVisible, setIsScrollToTopButtonVisible] = useState(false)
 
-  useEffect(() => {
-    window.addEventListener('scroll', toggleScrollToTopButtonVisibility)
-  }, [])
-
-  function toggleScrollToTopButtonVisibility() {
-    if (window.pageYOffset > 300) {
-      setIsScrollToTopButtonVisible(true)
-      return
-    }
-
-    setIsScrollToTopButtonVisible(false)
-  }
-
-  function handleScrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  async function handleFetchMorePosts() {
+  async function handleFetchMorePosts(): Promise<void> {
     setIsFetchingMorePosts(true)
 
     const updatedCurrentPage = currentPage + 1
@@ -117,20 +98,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
         )}
       </main>
 
-      <AnimatePresence>
-        {isScrollToTopButtonVisible && (
-          <motion.button
-            className={styles.scrollToTop}
-            key="scrollToTopButton"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleScrollToTop}
-          >
-            <AiOutlineArrowUp size={16} />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      <ScrollToTopButton />
     </>
   )
 }

@@ -1,0 +1,16 @@
+.wrapper {
+  position: fixed;
+  width: 3.5rem;
+  height: 3.5rem;
+  right: 2.5rem;
+  bottom: 2.5rem;
+  color: var(--white);
+  background-color: var(--gray-700);
+  border: 0;
+  border-radius: 0.5rem;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: var(--gray-800);
+  }
+}
