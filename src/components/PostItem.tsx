@@ -2,6 +2,8 @@ import Link from 'next/link'
 
 import { Tag } from '@components/Tag'
 
+import { Tag as TagModel } from '@models/Tag'
+
 import styles from '@styles/components/PostItem.module.scss'
 
 interface PostItemProps {
@@ -10,7 +12,7 @@ interface PostItemProps {
   title: string
   abstract: string
   readingTime: number
-  tags: Array<{ id: string; name: string; color: string }>
+  tags: TagModel[]
   date: string
 }
 
