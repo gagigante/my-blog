@@ -3,6 +3,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Prismic from '@prismicio/client'
+import { motion } from 'framer-motion'
 import { RichText, Link } from 'prismic-dom'
 import { useReadingTime } from 'react-hook-reading-time'
 import { Dots } from 'react-activity'
@@ -59,7 +60,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
 
       <Header githubUrl={githubUrl} linkedInUrl={linkedInUrl} twitterUrl={twitterUrl} />
 
-      <main className={styles.wrapper}>
+      <motion.main className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <section className={styles.hero}>
           <div className={styles.avatar}>
             <Image
@@ -87,7 +88,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
             {!!isFetchingMorePosts ? <Dots /> : 'Carregar mais posts'}
           </button>
         )}
-      </main>
+      </motion.main>
 
       <ScrollToTopButton />
     </>
