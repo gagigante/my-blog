@@ -78,16 +78,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
 
         <section className={styles.posts}>
           {postList.map(post => (
-            <PostItem
-              slug={post.slug}
-              path={`/post/${post.slug}`}
-              title={post.title}
-              abstract={post.abstract}
-              readingTime={post.readingTime}
-              tags={post.tags}
-              date={post.date}
-              key={post.slug}
-            />
+            <PostItem key={post.slug} post={post} />
           ))}
         </section>
 

@@ -2,37 +2,31 @@ import Link from 'next/link'
 
 import { Tag } from '@components/Tag'
 
-import { Tag as TagModel } from '@models/Tag'
+import { Post } from '@models/Post'
 
 import styles from '@styles/components/PostItem.module.scss'
 
 interface PostItemProps {
-  slug: string
-  path: string
-  title: string
-  abstract: string
-  readingTime: number
-  tags: TagModel[]
-  date: string
+  post: Post
 }
 
-export const PostItem = ({ slug, path, title, abstract, readingTime, tags, date }: PostItemProps) => {
+export const PostItem = ({ post }: PostItemProps) => {
   return (
-    <Link href={path} key={slug}>
+    <Link href={`/post/${post.slug}`}>
       <a className={styles.wrapper}>
         <span className={styles.metaData}>
-          <time>{date}</time> | {readingTime} Min de leitura
+          <time>{post.date}</time> | {post.readingTime} Min de leitura
         </span>
 
-        <h2>{title}</h2>
+        <h2>{post.title}</h2>
 
         <div className={styles.tags}>
-          {tags.map(tag => (
+          {post.tags.map(tag => (
             <Tag title={tag.name} color={tag.color} key={tag.id} />
           ))}
         </div>
 
-        <p>{abstract}</p>
+        <p>{post.abstract}</p>
       </a>
     </Link>
   )
