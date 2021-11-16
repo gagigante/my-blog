@@ -18,23 +18,29 @@ export const Header = ({ githubUrl, linkedInUrl, twitterUrl }: HeaderProps) => {
         </Link>
 
         <ul className={styles.links}>
-          <li>
-            <a href={githubUrl} aria-label="GitHub" target="_blank" rel="noreferrer">
-              <AiOutlineGithub />
-            </a>
-          </li>
+          {githubUrl.length > 0 && (
+            <li>
+              <a href={githubUrl} aria-label="GitHub" target="_blank" rel="noreferrer">
+                <AiOutlineGithub />
+              </a>
+            </li>
+          )}
 
-          <li>
-            <a href={linkedInUrl} aria-label="LinkedIn" target="_blank" rel="noreferrer">
-              <AiFillLinkedin />
-            </a>
-          </li>
+          {linkedInUrl.length > 0 && (
+            <li>
+              <a href={linkedInUrl} aria-label="LinkedIn" target="_blank" rel="noreferrer">
+                <AiFillLinkedin />
+              </a>
+            </li>
+          )}
 
-          <li>
-            <a href={twitterUrl} aria-label="Twitter" target="_blank" rel="noreferrer">
-              <AiOutlineTwitter />
-            </a>
-          </li>
+          {twitterUrl.length > 0 && (
+            <li>
+              <a href={twitterUrl} aria-label="Twitter" target="_blank" rel="noreferrer">
+                <AiOutlineTwitter />
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </header>
