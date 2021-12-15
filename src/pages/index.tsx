@@ -76,11 +76,20 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
 
         {/* TODO: Search engine */}
 
-        <section className={styles.posts}>
-          {postList.map(post => (
-            <PostItem key={post.slug} post={post} />
-          ))}
-        </section>
+        {postList.length === 0 && (
+          <div className={styles.emptyContent}>
+            <span>😴</span>
+            <h2>Nenhum post encontrado...</h2>
+          </div>
+        )}
+
+        {postList.length > 0 && (
+          <section className={styles.posts}>
+            {postList.map(post => (
+              <PostItem key={post.slug} post={post} />
+            ))}
+          </section>
+        )}
 
         {currentPage < totalPostPages && (
           <button className={styles.loadMorePosts} onClick={handleFetchMorePosts}>
