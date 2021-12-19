@@ -1,5 +1,19 @@
 .wrapper {
+  display: flex;
+  align-items: center;
   padding: 0.4rem 0.6rem;
   font-size: 0.6rem;
   border-radius: 1.4rem;
+
+  .closeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-left: 0.4rem;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+  }
 }
