@@ -13,6 +13,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
 
+          {/* TODO: Create custom favicon */}
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
