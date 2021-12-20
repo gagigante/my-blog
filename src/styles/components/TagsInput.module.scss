@@ -1,0 +1,85 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  
+  .inputContainer {
+    position: relative;
+    background-color: var(--gray-850);
+    border-color: var(--gray-400);
+    border-radius: 0.4rem;
+    transition: 0.2s;
+
+    &:hover, &:focus-within {
+      border-color: var(--green);
+
+      legend {
+        color: var(--green);
+      }
+    }
+
+    legend {
+      margin: 0 0.5rem;
+      padding: 0 0.4rem;
+      color: var(--gray-100);
+    }
+
+    input {
+      width: 100%;
+      height: 2.8rem;
+      font-size: 1rem;
+      color: var(--gray-100);
+      background-color: transparent;
+      padding: 0 1rem 0.4rem;
+      border: 0;
+      outline: 0;
+    }
+
+    .inputDropdown {
+      width: 100%;
+      position: absolute;
+      top: 3.2rem;
+      left: 0;
+      
+      background-color: var(--gray-850);
+      list-style: none;
+      border-radius: 0.4rem;
+      overflow: hidden;
+
+      li {
+        padding: 1rem;
+        transition: 0.2s;
+        
+        & + li {
+          border-top: 1px solid var(--gray-800);
+        }
+      
+        button {
+          text-align: left;
+          width: 100%;
+          color: var(--gray-100);
+          background-color: transparent;
+          border: 0;
+
+          b {
+            font-weight: 700;
+            background-clip: text;
+            background: var(--hover-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+
+        &:hover {
+          background-color: var(--gray-875);
+        }
+      }
+    }
+  }
+
+  .tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+}

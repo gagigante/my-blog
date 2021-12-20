@@ -22,7 +22,7 @@ export const PostItem = ({ post }: PostItemProps) => {
 
         <div className={styles.tags}>
           {post.tags.map(tag => (
-            <Tag title={tag.name} color={tag.color} key={tag.id} />
+            <Tag key={tag.id} id={tag.id} title={tag.name} color={tag.color} />
           ))}
         </div>
 
