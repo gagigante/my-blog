@@ -42,7 +42,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
 
     const updatedCurrentPage = currentPage + 1
 
-    const { data } = await api.get(`fetch-posts?page=${updatedCurrentPage}`)
+    const { data } = await api.get(`posts?page=${updatedCurrentPage}`)
 
     setPostList(oldState => [...oldState, ...data.posts])
     setIsFetchingMorePosts(false)
