@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -14,8 +14,10 @@ import { api } from '@services/api'
 import { Header } from '@components/Header'
 import { PostItem } from '@components/PostItem'
 import { ScrollToTopButton } from '@components/ScrollToTopButton'
+import { TagsInput } from '@components/TagsInput'
 
 import { Post } from '@models/Post'
+import { Tag } from '@models/Tag'
 
 import { getPostTags } from '@utils/getPostTags'
 
@@ -30,24 +32,44 @@ interface HomeProps {
   twitterUrl: string
   posts: Post[]
   totalPostPages: number
+  tags: Tag[]
 }
 
-const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, posts, totalPostPages }) => {
+const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, posts, totalPostPages, tags }) => {
   const [postList, setPostList] = useState(posts)
   const [currentPage, setCurrentPage] = useState(1)
+  const [totalPaginationPages, setTotalPaginationPages] = useState(totalPostPages)
+  const [tagsFilter, setTagsFilter] = useState<Tag[]>([])
+  const [isLoadingPosts, setIsLoadingPosts] = useState(false)
   const [isFetchingMorePosts, setIsFetchingMorePosts] = useState(false)
 
   async function handleFetchMorePosts(): Promise<void> {
     setIsFetchingMorePosts(true)
 
     const updatedCurrentPage = currentPage + 1
+    const tagsParamValue = tagsFilter.map(tag => tag.id).join(',')
 
-    const { data } = await api.get(`posts?page=${updatedCurrentPage}`)
+    const { data } = await api.get<{ posts: Post[] }>(`posts?page=${updatedCurrentPage}&tags=${tagsParamValue}`)
 
     setPostList(oldState => [...oldState, ...data.posts])
     setIsFetchingMorePosts(false)
     setCurrentPage(updatedCurrentPage)
   }
+
+  const handleFilterPosts = useCallback(async (tags: Tag[]) => {
+    setIsLoadingPosts(true)
+
+    const tagsParamValue = tags.map(tag => tag.id).join(',')
+
+    const { data } = await api.get<{ posts: Post[]; totalPostPages: number }>(`posts?tags=${tagsParamValue}`)
+
+    setPostList([...data.posts])
+    setTagsFilter(tags)
+    setIsFetchingMorePosts(false)
+    setCurrentPage(1)
+    setTotalPaginationPages(data.totalPostPages)
+    setIsLoadingPosts(false)
+  }, [])
 
   return (
     <>
@@ -74,16 +96,29 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
           <p>{bio}</p>
         </section>
 
-        {/* TODO: Search engine */}
+        <div className={styles.searchContainer}>
+          <TagsInput
+            label="Pesquise por tópicos"
+            placeholder="Digite para selecionar um tópico"
+            suggestions={tags}
+            onChange={handleFilterPosts}
+          />
+        </div>
 
-        {postList.length === 0 && (
+        {isLoadingPosts && (
+          <div className={styles.loadingContainer}>
+            <Dots />
+          </div>
+        )}
+
+        {!isLoadingPosts && postList.length === 0 && (
           <div className={styles.emptyContent}>
             <span>😴</span>
             <h2>Nenhum post encontrado...</h2>
           </div>
         )}
 
-        {postList.length > 0 && (
+        {!isLoadingPosts && postList.length > 0 && (
           <section className={styles.posts}>
             {postList.map(post => (
               <PostItem key={post.slug} post={post} />
@@ -91,7 +126,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
           </section>
         )}
 
-        {currentPage < totalPostPages && (
+        {!isLoadingPosts && currentPage < totalPaginationPages && (
           <button className={styles.loadMorePosts} onClick={handleFetchMorePosts}>
             {!!isFetchingMorePosts ? <Dots /> : 'Carregar mais posts'}
           </button>
@@ -110,14 +145,19 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     results: [document]
   } = await prismic.query([Prismic.predicates.at('document.type', 'home')])
 
-  const { results, total_pages } = await prismic.query([Prismic.predicates.at('document.type', 'post')], {
-    fetchLinks: ['tag.tag_color', 'tag.tag_name'],
-    orderings: '[document.first_publication_date desc]',
-    pageSize: POST_PAGINATION_QUANTITY
-  })
+  const { results: postResults, total_pages: postTotalPages } = await prismic.query(
+    [Prismic.predicates.at('document.type', 'post')],
+    {
+      fetchLinks: ['tag.tag_color', 'tag.tag_name'],
+      orderings: '[document.first_publication_date desc]',
+      pageSize: POST_PAGINATION_QUANTITY
+    }
+  )
+
+  const { results: tagResults } = await prismic.query([Prismic.predicates.at('document.type', 'tag')])
 
   // TODO: Format date using pt-BR locale
-  const posts: Post[] = results.map(post => {
+  const posts: Post[] = postResults.map(post => {
     return {
       slug: String(post.uid),
       title: RichText.asText(post.data.title),
@@ -133,6 +173,14 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     }
   })
 
+  const tags: Tag[] = tagResults.map(tag => {
+    return {
+      id: tag.id,
+      name: tag.data.tag_name,
+      color: tag.data.tag_color
+    }
+  })
+
   const A_WEEK_IN_SECONDS = 60 * 60 * 24 * 7
 
   return {
@@ -142,7 +190,8 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       linkedInUrl: Link.url(document.data.linkedin_url),
       twitterUrl: Link.url(document.data.twitter_url),
       posts,
-      totalPostPages: total_pages
+      totalPostPages: postTotalPages,
+      tags
     },
     revalidate: A_WEEK_IN_SECONDS
   }

@@ -13,10 +13,11 @@ import { POST_PAGINATION_QUANTITY } from '@constants/POST_PAGINATION_QUANTITY'
 
 interface ResponseData {
   posts: Post[]
+  totalPostPages: number
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) => {
-  const { page } = req.query
+  const { page, tags } = req.query
 
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET')
@@ -26,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) =
 
   const prismic = getPrismicClient(req)
 
-  const { results } = await prismic.query([Prismic.predicates.at('document.type', 'post')], {
+  const { results, total_pages } = await prismic.query(getQueryPredicates(String(tags)), {
     fetchLinks: ['tag.tag_color', 'tag.tag_name'],
     orderings: '[document.first_publication_date desc]',
     pageSize: POST_PAGINATION_QUANTITY,
@@ -50,5 +51,20 @@ export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) =
     }
   })
 
-  res.status(200).json({ posts })
+  res.status(200).json({ posts, totalPostPages: total_pages })
+}
+
+const getQueryPredicates = (tags: string): string[] => {
+  const tagsIds = tags.split(',')
+
+  if (tagsIds[0] !== '' && tagsIds.length > 0) {
+    return [
+      Prismic.predicates.at('document.type', 'post'),
+      ...tagsIds.map(tagId => {
+        return Prismic.predicates.at('my.post.tags.tag', tagId)
+      })
+    ]
+  }
+
+  return [Prismic.predicates.at('document.type', 'post')]
 }

@@ -33,6 +33,20 @@
     }
   }
 
+  div.searchContainer {
+    margin-bottom: 4rem;
+
+    @media(max-width: 425px) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  div.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   div.emptyContent {
     display: flex;
     flex-direction: column;
