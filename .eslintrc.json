@@ -32,6 +32,8 @@
     }
   },
   "rules": {
+    // TODO: Order imports
+    // TODO: Style lint
     "prettier/prettier": "error",
     "jsx-a11y/anchor-is-valid": 0,
     "implicit-arrow-linebreak": "off",

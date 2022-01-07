@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Prismic from '@prismicio/client'
-import { RichText, Link } from 'prismic-dom'
+import * as PrismicHelpers from '@prismicio/helpers'
 import { useReadingTime } from 'react-hook-reading-time'
 import { Dots } from 'react-activity'
 
@@ -84,6 +84,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
       <motion.main className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
         <section className={styles.hero}>
           <div className={styles.avatar}>
+            {/* TODO: Blur loading */}
             <Image
               src="https://avatars.githubusercontent.com/u/48386738?v=4"
               width={96}
@@ -160,11 +161,11 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const posts: Post[] = postResults.map(post => {
     return {
       slug: String(post.uid),
-      title: RichText.asText(post.data.title),
+      title: String(PrismicHelpers.asText(post.data.title)),
       abstract: post.data.content.find((content: { type: string }) => content.type === 'paragraph')?.text ?? '',
-      content: RichText.asHtml(post.data.content),
+      content: String(PrismicHelpers.asHTML(post.data.content)),
       tags: getPostTags(post.data.tags),
-      readingTime: useReadingTime(RichText.asText(post.data.content)).minutes as number,
+      readingTime: useReadingTime(String(PrismicHelpers.asText(post.data.content))).minutes as number,
       date: new Date(String(post.first_publication_date)).toLocaleString('en', {
         year: 'numeric',
         month: 'long',
@@ -181,19 +182,19 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     }
   })
 
-  const A_WEEK_IN_SECONDS = 60 * 60 * 24 * 7
+  const A_MINUTE_IN_SECONDS = 60
 
   return {
     props: {
-      bio: RichText.asText(document.data.bio),
-      githubUrl: Link.url(document.data.github_url),
-      linkedInUrl: Link.url(document.data.linkedin_url),
-      twitterUrl: Link.url(document.data.twitter_url),
+      bio: String(PrismicHelpers.asText(document.data.bio)),
+      githubUrl: String(PrismicHelpers.asLink(document.data.github_url)),
+      linkedInUrl: String(PrismicHelpers.asLink(document.data.linkedin_url)),
+      twitterUrl: String(PrismicHelpers.asLink(document.data.twitter_url)),
       posts,
       totalPostPages: postTotalPages,
       tags
     },
-    revalidate: A_WEEK_IN_SECONDS
+    revalidate: A_MINUTE_IN_SECONDS
   }
 }
 
