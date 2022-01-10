@@ -157,7 +157,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
   const { results: tagResults } = await prismic.query([Prismic.predicates.at('document.type', 'tag')])
 
-  // TODO: Format date using pt-BR locale
   const posts: Post[] = postResults.map(post => {
     return {
       slug: String(post.uid),
@@ -166,7 +165,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       content: String(PrismicHelpers.asHTML(post.data.content)),
       tags: getPostTags(post.data.tags),
       readingTime: useReadingTime(String(PrismicHelpers.asText(post.data.content))).minutes as number,
-      date: new Date(String(post.first_publication_date)).toLocaleString('en', {
+      date: new Date(String(post.first_publication_date)).toLocaleString('pt-BR', {
         year: 'numeric',
         month: 'long',
         day: '2-digit'

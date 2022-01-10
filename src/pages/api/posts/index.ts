@@ -34,7 +34,6 @@ export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) =
     page
   })
 
-  // TODO: Format date using pt-BR locale
   const posts: Post[] = results.map(post => {
     return {
       slug: String(post.uid),
@@ -43,7 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) =
       content: RichText.asHtml(post.data.content),
       tags: getPostTags(post.data.tags),
       readingTime: useReadingTime(RichText.asText(post.data.content)).minutes as number,
-      date: new Date(String(post.first_publication_date)).toLocaleString('en', {
+      date: new Date(String(post.first_publication_date)).toLocaleString('pt-BR', {
         year: 'numeric',
         month: 'long',
         day: '2-digit'
