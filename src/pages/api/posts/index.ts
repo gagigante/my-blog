@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Prismic from '@prismicio/client'
-import { RichText } from 'prismic-dom'
+import * as PrismicHelpers from '@prismicio/helpers'
 import { useReadingTime } from 'react-hook-reading-time'
 
 import { getPrismicClient } from '@services/prismic'
@@ -37,11 +37,11 @@ export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) =
   const posts: Post[] = results.map(post => {
     return {
       slug: String(post.uid),
-      title: RichText.asText(post.data.title),
+      title: String(PrismicHelpers.asText(post.data.title)),
       abstract: post.data.content.find((content: { type: string }) => content.type === 'paragraph')?.text ?? '',
-      content: RichText.asHtml(post.data.content),
+      content: String(PrismicHelpers.asHTML(post.data.content)),
       tags: getPostTags(post.data.tags),
-      readingTime: useReadingTime(RichText.asText(post.data.content)).minutes as number,
+      readingTime: useReadingTime(String(PrismicHelpers.asText(post.data.content))).minutes as number,
       date: new Date(String(post.first_publication_date)).toLocaleString('pt-BR', {
         year: 'numeric',
         month: 'long',
