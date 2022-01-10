@@ -12,8 +12,8 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;600&family=Raleway:wght@300&display=swap"
             rel="stylesheet"
           />
+          <link rel="stylesheet" href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.min.css" />
 
-          {/* TODO: Create custom favicon */}
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
