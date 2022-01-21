@@ -12,7 +12,7 @@ interface PostItemProps {
 
 export const PostItem = ({ post }: PostItemProps) => {
   return (
-    <Link href={`/post/${post.slug}`}>
+    <Link href={`/posts/${post.slug}`}>
       <a className={styles.wrapper}>
         <span className={styles.metaData}>
           <time>{post.date}</time> | {post.readingTime} Min de leitura
