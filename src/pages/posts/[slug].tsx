@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import * as PrismicHelpers from '@prismicio/helpers'
 import { motion } from 'framer-motion'
 import Prismic from '@prismicio/client'
@@ -12,6 +11,7 @@ import { getPrismicClient } from '@services/prismic'
 import { Header } from '@components/Header'
 import { Tag } from '@components/Tag'
 import { ScrollToTopButton } from '@components/ScrollToTopButton'
+import { SEO } from '@components/SEO'
 
 import { Post as PostDTO } from '@models/Post'
 
@@ -52,9 +52,30 @@ const Post: NextPage<PostProps> = ({ post, githubUrl, linkedInUrl, twitterUrl })
     <>
       {/* TODO: SEO improvements */}
 
-      <Head>
-        <title>{post.title} | gg.dev</title>
-      </Head>
+      <SEO
+        title="Blog | Gabriel Gigante"
+        description="loren"
+        author="Gabriel Gigante"
+        keywords={[
+          'Blog',
+          'Programação',
+          'Desenvolvimento',
+          'Software',
+          'Web',
+          'HTML',
+          'CSS',
+          'JavaScript',
+          'TypeScript'
+        ]}
+        image={{
+          url: 'https://gabrielgigante.dev/test.png',
+          alt: 'Blog | Gabriel Gigante',
+          width: '1120',
+          height: '528'
+        }}
+        pageType="article"
+        pageUrl={process.env.NEXT_PUBLIC_SITE_URL || ''}
+      />
 
       <Header githubUrl={githubUrl} linkedInUrl={linkedInUrl} twitterUrl={twitterUrl} />
 

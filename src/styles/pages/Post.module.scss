@@ -2,6 +2,8 @@
   max-width: 1120px;  
   margin: 0 auto;
   padding: 0 2rem 2rem;
+  // width: 100vw;
+  // overflow-x: hidden;
 
   .post {
     max-width: 1120px;
@@ -75,23 +77,6 @@
 
       > pre {
         margin-bottom: 2rem;
-      }
-
-      // Instagram embed
-      div[data-oembed-provider="Instagram"] {
-        margin: 0 auto;
-        max-width: 540px;
-
-        @media(max-width: 425px) {
-          max-width: 75vw !important;
-        }
-
-        > iframe {
-          width: 100%;  
-          margin: 0 auto !important;
-          border-radius: 1rem;
-          overflow: hidden;
-        }
       }
     }
   }

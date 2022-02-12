@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Prismic from '@prismicio/client'
@@ -15,6 +14,7 @@ import { Header } from '@components/Header'
 import { PostItem } from '@components/PostItem'
 import { ScrollToTopButton } from '@components/ScrollToTopButton'
 import { TagsInput } from '@components/TagsInput'
+import { SEO } from '@components/SEO'
 
 import { Post } from '@models/Post'
 import { Tag } from '@models/Tag'
@@ -75,9 +75,30 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
     <>
       {/* TODO: SEO improvements */}
 
-      <Head>
-        <title>Blog | Gabriel Gigante</title>
-      </Head>
+      <SEO
+        title="Blog | Gabriel Gigante"
+        description="loren"
+        author="Gabriel Gigante"
+        keywords={[
+          'Blog',
+          'Programação',
+          'Desenvolvimento',
+          'Software',
+          'Web',
+          'HTML',
+          'CSS',
+          'JavaScript',
+          'TypeScript'
+        ]}
+        image={{
+          url: 'https://gabrielgigante.dev/test.png',
+          alt: 'Blog | Gabriel Gigante',
+          width: '1120',
+          height: '528'
+        }}
+        pageType="website"
+        pageUrl={process.env.NEXT_PUBLIC_SITE_URL || ''}
+      />
 
       <Header githubUrl={githubUrl} linkedInUrl={linkedInUrl} twitterUrl={twitterUrl} />
 
