@@ -12,6 +12,8 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;600&family=Raleway:wght@300&display=swap"
             rel="stylesheet"
           />
+          <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com" rel="preconnect" />
           <link rel="stylesheet" href="https://unpkg.com/dracula-prism/dist/css/dracula-prism.min.css" />
 
           <link rel="icon" href="/favicon.ico" />

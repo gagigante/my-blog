@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 import Prismic from '@prismicio/client'
 import * as PrismicHelpers from '@prismicio/helpers'
 import { useReadingTime } from 'react-hook-reading-time'
@@ -81,7 +80,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
 
       <Header githubUrl={githubUrl} linkedInUrl={linkedInUrl} twitterUrl={twitterUrl} />
 
-      <motion.main className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <main className={styles.wrapper}>
         <section className={styles.hero}>
           <div className={styles.avatar}>
             {/* TODO: Blur loading */}
@@ -132,7 +131,7 @@ const Home: NextPage<HomeProps> = ({ bio, githubUrl, linkedInUrl, twitterUrl, po
             {!!isFetchingMorePosts ? <Dots /> : 'Carregar mais posts'}
           </button>
         )}
-      </motion.main>
+      </main>
 
       <ScrollToTopButton />
     </>

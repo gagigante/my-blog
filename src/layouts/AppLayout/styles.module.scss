@@ -1,0 +1,14 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #121214;
+    background-size: 11px 11px;
+    background-image: radial-gradient(#424242 0.55px, #121214 0.55px);
+    opacity: 0.6;
+  }
+}
