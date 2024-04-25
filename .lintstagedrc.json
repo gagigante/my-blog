@@ -1,0 +1,5 @@
+{
+  "src/**/**.ts?(x)": [
+    "eslint --max-warnings=0 --fix"
+  ]
+}
