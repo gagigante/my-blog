@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import * as PrismicHelpers from '@prismicio/helpers'
-import { motion } from 'framer-motion'
 import Prismic from '@prismicio/client'
 import Prism from 'prismjs'
 import { useReadingTime } from 'react-hook-reading-time'
@@ -58,7 +57,7 @@ const Post: NextPage<PostProps> = ({ post, githubUrl, linkedInUrl, twitterUrl })
 
       <Header githubUrl={githubUrl} linkedInUrl={linkedInUrl} twitterUrl={twitterUrl} />
 
-      <motion.main className={styles.wrapper} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <main className={styles.wrapper}>
         <article className={styles.post}>
           <h1>{post.title}</h1>
 
@@ -73,7 +72,7 @@ const Post: NextPage<PostProps> = ({ post, githubUrl, linkedInUrl, twitterUrl })
           </div>
           <div className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>
-      </motion.main>
+      </main>
 
       <ScrollToTopButton />
 
