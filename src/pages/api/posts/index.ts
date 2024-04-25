@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) =
     fetchLinks: ['tag.tag_color', 'tag.tag_name'],
     orderings: '[document.first_publication_date desc]',
     pageSize: POST_PAGINATION_QUANTITY,
-    page
+    page: page as string
   })
 
   const posts: Post[] = results.map(post => {

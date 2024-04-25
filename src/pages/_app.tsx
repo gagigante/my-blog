@@ -1,14 +1,19 @@
 import type { AppProps } from 'next/app'
-import { AnimatePresence } from 'framer-motion'
+import { Roboto as robotoFont } from 'next/font/google'
 
 import '@styles/globals.scss'
 import 'react-activity/dist/Dots.css'
 
+const roboto = robotoFont({
+  weight: ['400', '500', '700'],
+  subsets: ['latin']
+})
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AnimatePresence exitBeforeEnter>
+    <main className={`${roboto.className} font-sans`}>
       <Component {...pageProps} />
-    </AnimatePresence>
+    </main>
   )
 }
 
