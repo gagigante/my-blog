@@ -9,14 +9,10 @@
     "lint": "next lint",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "src/**/**.ts?(x)": [
-      "eslint --max-warnings=0 --fix"
-    ]
-  },
   "dependencies": {
     "@prismicio/client": "^5.1.0",
     "@prismicio/helpers": "^2.0.0",
+    "@vercel/analytics": "^1.2.2",
     "axios": "^0.21.4",
     "next": "^14.2.3",
     "polished": "^4.1.3",
