@@ -12,22 +12,20 @@ interface PostItemProps {
 
 export const PostItem = ({ post }: PostItemProps) => {
   return (
-    <Link href={`/posts/${post.slug}`}>
-      <a className={styles.wrapper}>
-        <span className={styles.metaData}>
-          <time>{post.date}</time> | {post.readingTime} Min de leitura
-        </span>
+    <Link href={`/posts/${post.slug}`} className={styles.wrapper}>
+      <span className={styles.metaData}>
+        <time>{post.date}</time> | {post.readingTime} Min de leitura
+      </span>
 
-        <h2>{post.title}</h2>
+      <h2>{post.title}</h2>
 
-        <div className={styles.tags}>
-          {post.tags.map(tag => (
-            <Tag key={tag.id} id={tag.id} title={tag.name} color={tag.color} />
-          ))}
-        </div>
+      <div className={styles.tags}>
+        {post.tags.map(tag => (
+          <Tag key={tag.id} id={tag.id} title={tag.name} color={tag.color} />
+        ))}
+      </div>
 
-        <p>{post.abstract}</p>
-      </a>
+      <p>{post.abstract}</p>
     </Link>
   )
 }
