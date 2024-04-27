@@ -13,7 +13,7 @@ export const Header = ({ githubUrl, linkedInUrl, twitterUrl }: HeaderProps) => {
   return (
     <header className={styles.wrapper}>
       <div className={styles.content}>
-        <Link href="/">heloisa.fedo</Link>
+        <Link href="/">gg.dev</Link>
 
         <ul className={styles.links}>
           {githubUrl !== 'null' && (
