@@ -1,0 +1,7 @@
+.content {
+  display: flex;
+  flex: 1;
+  background: radial-gradient(circle, var(--gray-800) 10%, transparent 11%);
+  background-size: 1em 1em;
+  opacity: 0.8;
+}
