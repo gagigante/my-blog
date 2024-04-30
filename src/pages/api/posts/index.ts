@@ -7,7 +7,7 @@ import { getPrismicClient } from '@services/prismic'
 
 import { Post } from '@models/Post'
 
-import { getPostTags } from '@utils/getPostTags'
+import { parsePostTags } from '@utils/parsePostTags'
 
 import { POST_PAGINATION_QUANTITY } from '@constants/POST_PAGINATION_QUANTITY'
 
@@ -40,7 +40,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ResponseData>) =
       title: String(PrismicHelpers.asText(post.data.title)),
       abstract: post.data.content.find((content: { type: string }) => content.type === 'paragraph')?.text ?? '',
       content: String(PrismicHelpers.asHTML(post.data.content)),
-      tags: getPostTags(post.data.tags),
+      tags: parsePostTags(post.data.tags),
       readingTime: useReadingTime(String(PrismicHelpers.asText(post.data.content))).minutes as number,
       date: new Date(String(post.first_publication_date)).toLocaleString('pt-BR', {
         year: 'numeric',

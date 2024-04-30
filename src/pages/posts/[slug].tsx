@@ -14,7 +14,7 @@ import { ScrollToTopButton } from '@components/ScrollToTopButton'
 
 import { Post as PostDTO } from '@models/Post'
 
-import { getPostTags } from '@utils/getPostTags'
+import { parsePostTags } from '@utils/parsePostTags'
 
 import { POST_ISR_QUANTITY } from '@constants/POSTS_ISR_QUANTITY'
 
@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
   const post: Omit<PostDTO, 'abstract'> = {
     slug,
     title: String(PrismicHelpers.asText(response.data.title)),
-    tags: getPostTags(response.data.tags),
+    tags: parsePostTags(response.data.tags),
     content: String(PrismicHelpers.asHTML(response.data.content)),
     // TODO: Create a function to calculate reading time
     // eslint-disable-next-line react-hooks/rules-of-hooks
