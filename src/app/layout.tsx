@@ -4,16 +4,11 @@ import { Analytics } from '@vercel/analytics/react'
 
 import { Header } from '@components/Header'
 
-import { getSocialLinks } from './utils'
+import { getSocialLinks } from './lib/data'
 
 import '@styles/globals.scss'
 import styles from './layout.module.scss'
 import 'react-activity/dist/Dots.css'
-
-export const metadata = {
-  title: 'Blog | Gabriel Gigante',
-  description: 'Apenas um desenvolvedor de software que gosta de compartilhar conhecimento'
-}
 
 const primary = ralaway({
   weight: ['400', '600', '700'],
@@ -24,6 +19,11 @@ const secondary = jetbrains({
   weight: ['400', '600', '700'],
   subsets: ['latin']
 })
+
+export const metadata = {
+  title: 'Blog | Gabriel Gigante',
+  description: 'Apenas um desenvolvedor de software que gosta de compartilhar conhecimento.'
+}
 
 export const revalidate = 3600 // 1 hour
 
