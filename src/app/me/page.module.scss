@@ -4,6 +4,7 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 }  
 
 .content {
@@ -13,6 +14,10 @@
   background-color: var(--gray-875);
   border-radius: 0.5rem;
 
+  @media(max-width: 425px) {
+    padding: 1rem;
+  }
+
   > .avatar {
     border-radius: 50%;
   }
@@ -21,7 +26,6 @@
     font-weight: 600;
     font-size: 2.5rem;
     margin-top: 2rem;
-
     background-clip: text;
     background: var(--hover-gradient);
     -webkit-background-clip: text;
@@ -37,8 +41,14 @@
   .contactInfo {
     display: flex;
     margin-top: 1.5rem;
-    gap: 2rem;
+    column-gap: 2rem;
     flex-wrap: wrap;
+
+    @media(max-width: 425px) {
+      & p:first-child {
+        margin-bottom: 0.5rem;
+      }
+    }
 
     > p {
       font-size: 0.8rem;
