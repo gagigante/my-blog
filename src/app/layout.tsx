@@ -1,14 +1,9 @@
 import { Raleway as ralaway, JetBrains_Mono as jetbrains } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
-// import { SpeedInsights } from '@vercel/speed-insights/next'
 
-import { Header } from '@components/Header'
+import { Header } from '@components/header'
 
-import { getSocialLinks } from './lib/data'
-
-import '@styles/globals.scss'
-import styles from './layout.module.scss'
-import 'react-activity/dist/Dots.css'
+import '@styles/globals.css'
 
 const primary = ralaway({
   weight: ['400', '600', '700'],
@@ -20,6 +15,7 @@ const secondary = jetbrains({
   subsets: ['latin']
 })
 
+// TODO: add metadata
 export const metadata = {
   title: 'Blog | Gabriel Gigante',
   description: 'Apenas um desenvolvedor de software que gosta de compartilhar conhecimento.'
@@ -28,15 +24,13 @@ export const metadata = {
 export const revalidate = 3600 // 1 hour
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { githubUrl, linkedInUrl, twitterUrl } = await getSocialLinks()
   return (
     <html lang="pt-BR" className={`${primary.className} ${secondary.className}`}>
-      <body>
-        <Header githubUrl={githubUrl} linkedInUrl={linkedInUrl} twitterUrl={twitterUrl} />
-        <div className={styles.content}>{children}</div>
+      <body className="w-screen h-screen bg-gray-950">
+        <Header githubUrl="https://github.com/gagigante" linkedInUrl="https://www.linkedin.com/in/gabriel-gigante/" />
+        <div>{children}</div>
       </body>
       <Analytics />
-      {/* TODO: <SpeedInsights /> */}
     </html>
   )
 }
