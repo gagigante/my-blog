@@ -17,10 +17,16 @@ export const Header = ({ githubUrl, linkedInUrl }: HeaderProps) => {
           gg.dev
         </Link>
 
-        <ul className="flex space-x-4">
+        <ul className="flex space-x-4 text-white">
           {githubUrl !== null && (
             <li>
-              <a href={githubUrl} aria-label="GitHub" target="_blank" rel="noreferrer">
+              <a
+                className="hover:text-white/80 transition-colors"
+                href={githubUrl}
+                aria-label="GitHub"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <RiGithubFill />
               </a>
             </li>
@@ -28,7 +34,13 @@ export const Header = ({ githubUrl, linkedInUrl }: HeaderProps) => {
 
           {linkedInUrl !== null && (
             <li>
-              <a href={linkedInUrl} aria-label="LinkedIn" target="_blank" rel="noreferrer">
+              <a
+                className="hover:text-white/80 transition-colors"
+                href={linkedInUrl}
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <RiLinkedinFill />
               </a>
             </li>

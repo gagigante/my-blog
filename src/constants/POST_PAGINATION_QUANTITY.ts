@@ -1,1 +1,1 @@
-export const POST_PAGINATION_QUANTITY = 1
+export const POST_PAGINATION_QUANTITY = 10

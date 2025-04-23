@@ -1,15 +1,16 @@
-import { Suspense } from 'react'
-import Image from 'next/image'
-import { Dots } from 'react-activity'
+// import { Suspense } from 'react'
+// import Image from 'next/image'
+// import { Dots } from 'react-activity'
 
-import { PostItem } from '@components/PostItem'
-import { Pagination } from '@components/Pagination'
-import { ScrollToTopButton } from '@components/ScrollToTopButton'
-// import { TagsInput } from '@components/TagsInput'
+// import { PostItem } from '@components/PostItem'
+// import { Pagination } from '@components/Pagination'
+// import { ScrollToTopButton } from '@components/ScrollToTopButton'
+// // import { TagsInput } from '@components/TagsInput'
 
-import { getBio, getPostTags, getPosts } from './lib/data'
+// import { getBio, getPostTags, getPosts } from './lib/data'
 
 import styles from '@styles/pages/Home.module.scss'
+// import Loading from './loading'
 
 interface PageProps {
   searchParams: {
@@ -19,13 +20,13 @@ interface PageProps {
 }
 
 export default async function Page({ searchParams: { page = '1', tags = '' } }: PageProps) {
-  const tagsFilter = tags.split(',').filter(item => !!item)
-  const currentPage = Number(page)
+  // const tagsFilter = tags.split(',').filter(item => !!item)
+  // const currentPage = Number(page)
 
-  // TODO: handle error
-  const bio = await getBio()
-  const postTags = await getPostTags()
-  const { posts, total } = await getPosts(currentPage)
+  // // TODO: handle error
+  // const bio = await getBio()
+  // const postTags = await getPostTags()
+  // const { posts, total } = await getPosts(currentPage)
 
   // async function handleFetchMorePosts(): Promise<void> {
   //   setIsFetchingMorePosts(true)
@@ -54,10 +55,15 @@ export default async function Page({ searchParams: { page = '1', tags = '' } }: 
   //   setTotalPaginationPages(data.totalPostPages)
   //   setIsLoadingPosts(false)
   // }, [])
+  // return <Loading />
 
   return (
     <main className={styles.wrapper}>
-      <section className={styles.hero}>
+      <br />
+      <br />
+      <br />
+      <br />
+      {/* <section className={styles.hero}>
         <div className={styles.avatar}>
           <Image
             src="https://avatars.githubusercontent.com/u/48386738?v=4"
@@ -69,7 +75,7 @@ export default async function Page({ searchParams: { page = '1', tags = '' } }: 
         </div>
 
         <p>{bio}</p>
-      </section>
+      </section> */}
 
       {/* <div className={styles.searchContainer}>
         <TagsInput
@@ -79,11 +85,12 @@ export default async function Page({ searchParams: { page = '1', tags = '' } }: 
           onChange={undefined as any}
         />
       </div> */}
+      <h1>home</h1>
 
       {/* 
         - REVIEW: KEY
       */}
-      <Suspense
+      {/* <Suspense
         key={currentPage}
         fallback={
           <div className={styles.loadingContainer}>
@@ -91,21 +98,23 @@ export default async function Page({ searchParams: { page = '1', tags = '' } }: 
           </div>
         }
       >
-        {posts.length === 0 && (
-          <div className={styles.emptyContent}>
-            <span>😴</span>
-            <h2>Nenhum post encontrado...</h2>
-          </div>
-        )}
+        <section className={styles.posts}>
+          {posts.length === 0 && (
+            <div className={styles.emptyContent}>
+              <span>😴</span>
+              <h2>Nenhum post encontrado...</h2>
+            </div>
+          )}
 
-        {posts.map(post => (
-          <PostItem key={post.slug} post={post} />
-        ))}
+          {posts.map(post => (
+            <PostItem key={post.slug} post={post} />
+          ))}
+        </section>
       </Suspense>
 
       <Pagination totalPosts={total} />
 
-      <ScrollToTopButton />
+      <ScrollToTopButton /> */}
     </main>
   )
 }

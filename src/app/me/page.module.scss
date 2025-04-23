@@ -14,7 +14,7 @@
   background-color: var(--gray-875);
   border-radius: 0.5rem;
 
-  @media(max-width: 425px) {
+  @media(max-width: 450px) {
     padding: 1rem;
   }
 
@@ -44,7 +44,7 @@
     column-gap: 2rem;
     flex-wrap: wrap;
 
-    @media(max-width: 425px) {
+    @media(max-width: 450px) {
       & p:first-child {
         margin-bottom: 0.5rem;
       }

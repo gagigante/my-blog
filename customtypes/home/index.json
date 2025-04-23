@@ -1,0 +1,39 @@
+{
+  "id": "home",
+  "label": "Home",
+  "repeatable": false,
+  "json": {
+    "Main": {
+      "bio": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph",
+          "label": "Bio"
+        }
+      },
+      "github_url": {
+        "type": "Link",
+        "config": {
+          "label": "Github URL",
+          "select": null
+        }
+      },
+      "linkedin_url": {
+        "type": "Link",
+        "config": {
+          "label": "LinkedIn URL",
+          "select": null
+        }
+      },
+      "twitter_url": {
+        "type": "Link",
+        "config": {
+          "label": "Twitter URL",
+          "select": null
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}
