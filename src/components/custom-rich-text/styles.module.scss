@@ -1,0 +1,32 @@
+.heading2 {
+  font-size: 2rem;
+  margin: 3.5rem 0 1.125rem;
+}
+
+.heading3 {
+  font-size: 1.75rem;
+  margin: 2.75rem 0 1rem;
+}
+
+.heading4 {
+  font-size: 1.25rem;
+  margin-top: 2.5rem 0 0.875rem;
+}
+
+.paragraph {
+  margin: 1.25rem 0;
+  line-height: 1.825;
+  color: var(--gray-100);
+  font-family: var(--primary-font);
+
+  em {
+    display: inline-block;
+    padding: 1px 2px;
+    background-color: #ecb5e3;
+    color: var(--gray-800);
+    font-family: var(--secondary-font);
+    font-size: 0.925rem;
+    line-height: 1.5;
+    border-radius: 4px;
+  }
+}

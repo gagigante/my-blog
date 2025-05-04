@@ -1,0 +1,48 @@
+{
+  "id": "post",
+  "label": "Post",
+  "repeatable": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "Slug"
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1",
+          "label": "Title"
+        }
+      },
+      "tags": {
+        "type": "Group",
+        "config": {
+          "fields": {
+            "tag": {
+              "type": "Link",
+              "config": {
+                "select": "document",
+                "customtypes": ["tag"],
+                "label": "Tag"
+              }
+            }
+          },
+          "label": "Tags"
+        }
+      },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph,preformatted,heading2,heading3,strong,em,hyperlink,image,embed,list-item,o-list-item",
+          "allowTargetBlank": true,
+          "label": "Content"
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}

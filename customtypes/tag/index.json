@@ -1,0 +1,23 @@
+{
+  "id": "tag",
+  "label": "Tag",
+  "repeatable": true,
+  "json": {
+    "Main": {
+      "tag_name": {
+        "type": "Text",
+        "config": {
+          "label": "Tag name"
+        }
+      },
+      "tag_color": {
+        "type": "Color",
+        "config": {
+          "label": "Tag color"
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}

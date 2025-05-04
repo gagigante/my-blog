@@ -1,0 +1,121 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto 2.5rem;
+  padding: 0 2rem;
+}
+
+.hero {
+  margin: 3rem 0 5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+  }
+
+  .bio {
+    flex: 1;
+    height: 64px;
+    border-radius: 0.5rem;
+  }
+
+  @media(max-width: 450px) {
+    flex-direction: column;
+    margin: 2rem 0 3rem;
+  }
+}
+
+.posts {
+  margin-bottom: 1.5rem;
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--gray-850);
+
+    > div {
+      border-radius: 0.5rem;
+    }
+
+    & + .post {
+      margin-top: 1.5rem;
+    }
+
+    .metadata {
+      width: 40%;
+      height: 0.8rem;
+      margin-bottom: 0.5rem;
+
+      @media(max-width: 450px) {
+        width: 80%;
+      }
+    }
+
+    .title {
+      width: 60%;
+      height: 2rem;
+      margin-bottom: 1rem;
+
+      @media(max-width: 450px) {
+        width: 90%;
+      }
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+
+      > div {
+        width: 80px;
+        height: 28px;
+        font-size: 0.6rem;
+        border-radius: 1.4rem;
+      }
+    }
+
+    .abstract {
+      width: 100%;
+      height: 80px;
+      border-radius: 0.5rem;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  
+  > div {
+    width: 36px;
+    height: 36px;
+    border-radius: 0.5rem;
+  }
+}
+
+.loading {
+  background-color: var(--gray-850);
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, .1) 50%,
+    rgba(255, 255, 255, 0) 20%
+  ) var(--gray-850);
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1.2s loading ease-in-out infinite;
+}
+
+@keyframes loading {
+  to {
+    background-position-x: -20%;
+  }
+}

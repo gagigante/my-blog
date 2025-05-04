@@ -10,7 +10,7 @@ interface TagDocument {
   }
 }
 
-export const getPostTags = (tags: TagDocument[]): Tag[] => {
+export const parsePostTags = (tags: TagDocument[]): Tag[] => {
   return tags.map(item => {
     return {
       id: item.tag.id,

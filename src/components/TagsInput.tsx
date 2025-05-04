@@ -1,3 +1,5 @@
+'use client'
+
 import { Tag } from '@components/Tag'
 import { Tag as TagDTO } from '@models/Tag'
 
