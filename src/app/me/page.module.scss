@@ -4,8 +4,8 @@
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-}  
+  padding: 2rem 1rem;
+}
 
 .content {
   max-width: 680px;
@@ -13,6 +13,7 @@
   padding: 2.5rem;
   background-color: var(--gray-875);
   border-radius: 0.5rem;
+  font-family: var(--secondary-font);
 
   @media(max-width: 425px) {
     padding: 1rem;
@@ -23,6 +24,7 @@
   }
 
   h2 {
+    font-family: var(--primary-font);
     font-weight: 600;
     font-size: 2.5rem;
     margin-top: 2rem;
@@ -36,6 +38,19 @@
     color: var(--gray-100);
     margin-top: 2rem;
     line-height: 2;
+    text-align: justify;
+
+    p + p {
+      margin-top: 1rem;
+    }
+
+    span {
+      font-weight: 700;
+      background-clip: text;
+      background: var(--hover-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .contactInfo {
@@ -51,6 +66,7 @@
     }
 
     > p {
+      font-family: var(--primary-font);
       font-size: 0.8rem;
       display: flex;
       align-items: center;
@@ -58,6 +74,171 @@
       svg {
         margin-right: 0.5rem;
       }
+    }
+  }
+
+  .section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-700);
+
+    h3 {
+      font-family: var(--primary-font);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+  }
+
+  .educationList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .professionalList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .educationItem {
+    padding: 1.25rem;
+    background-color: var(--gray-850);
+    border: 1px solid var(--gray-700);
+    border-radius: 0.5rem;
+
+    strong {
+      display: block;
+      font-family: var(--secondary-font);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--white);
+    }
+
+    p {
+      margin-top: 0.5rem;
+      color: var(--gray-100);
+      line-height: 1.6;
+    }
+
+    span {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-family: var(--primary-font);
+      font-size: 0.75rem;
+      color: var(--gray-300);
+    }
+  }
+
+  .professionalItem {
+    padding: 1.25rem;
+    background-color: var(--gray-850);
+    border: 1px solid var(--gray-700);
+    border-radius: 0.5rem;
+
+    .companyLogo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    strong {
+      display: block;
+      font-family: var(--secondary-font);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--white);
+    }
+
+    .companyHeader {
+      margin-bottom: 1rem;
+    }
+
+    .companyName {
+      font-size: 1.1rem;
+    }
+
+    .companyPeriod {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-family: var(--primary-font);
+      font-size: 0.75rem;
+      color: var(--gray-300);
+    }
+
+    .rolesList {
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 1px solid var(--gray-700);
+    }
+
+    .roleItem {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0.55rem;
+        left: -1.28rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: var(--hover-gradient);
+      }
+    }
+
+    .roleTitle {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .rolePeriod {
+      display: inline-block;
+      margin-top: 0.35rem;
+      color: var(--gray-300);
+      font-family: var(--primary-font);
+      font-size: 0.75rem;
+    }
+
+    .description {
+      margin-top: 0.5rem;
+
+      p {
+        color: var(--gray-100);
+        line-height: 1.8;
+        text-align: justify;
+      }
+
+      p + p {
+        margin-top: 0.75rem;
+      }
+    }
+  }
+
+  .readMoreButton {
+    margin-top: 0.5rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--green);
+    font-family: var(--primary-font);
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 }
