@@ -41,7 +41,7 @@ export const Header = ({ githubUrl, linkedInUrl, twitterUrl }: HeaderProps) => {
             </li>
             <li>
               <Link href="/me" className={pathname === '/me' ? styles.active : ''}>
-                Me
+                Sobre mim
               </Link>
             </li>
           </ul>
